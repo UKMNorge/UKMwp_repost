@@ -72,6 +72,7 @@ function ukmn_network_posts( $post_id ) {
 				  'title' => $WPOO->title,
 				  'lead' => $WPOO->lead,
 				  'uri' => $WPOO->url,
+				  'time' => $WPOO->date,
 				  'featured_image' => $WPOO->image->url);
 	
 

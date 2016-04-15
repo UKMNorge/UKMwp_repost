@@ -3,13 +3,16 @@
 <ul>
 {% for post in posts %}
 	<li class="col-xs-12 col-sm-6 col-md-3">
-		<a href="{{ post.uri }}">
-			<div class="grid_post_image" style="background-image: url('{{ post.featured_image }}');"></div>
-		</a>
+		<p>
+			<b>{{ post.blogname }}:</b> {{ post.time|date('H:i') }}, {{ post.time|date('d.M') }}
+		</p>
+		<p>
+			<a href="{{ post.uri }}">
+				<div class="grid_post_image" style="background-image: url('{{ post.featured_image }}');"></div>
+			</a>
+		</p>
 			
 		<p>
-			<span class="pull-right label label-info">{{ post.blog_name }}</span>
-		
 			<a href="{{ post.uri }}"><b>{{ post.title|raw }}</b></a>
 			<br />
 			{{ post.lead|raw }}
