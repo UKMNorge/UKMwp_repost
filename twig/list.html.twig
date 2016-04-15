@@ -1,0 +1,26 @@
+<h1>Publiserte innlegg på UKM.no</h1>
+
+<ul>
+{% for post in posts %}
+	<li class="col-xs-12 col-sm-6 col-md-3">
+		<a href="{{ post.uri }}">
+			<div class="grid_post_image" style="background-image: url('{{ post.featured_image }}');"></div>
+		</a>
+			
+		<p>
+			<span class="pull-right label label-info">{{ post.blog_name }}</span>
+		
+			<a href="{{ post.uri }}"><b>{{ post.title|raw }}</b></a>
+			<br />
+			{{ post.lead|raw }}
+		</p>
+	</li>
+	{% if loop.index is divisibleby( 4 )%}
+		<li class="clearfix visible-md visible-lg"></li>
+	{% endif %}
+	{% if loop.index is divisibleby( 2 )%}
+		<li class="clearfix visible-sm"></li>
+	{% endif %}
+
+{% endfor %}
+</ul>

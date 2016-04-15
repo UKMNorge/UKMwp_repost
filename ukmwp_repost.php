@@ -10,14 +10,23 @@ Author URI: http://mariusmandal.no
 
 add_action( 'save_post', 'ukmn_network_posts' );
 add_action('delete_post', 'ukmn_network_posts_delete', 8);
-#add_action('UKM_admin_menu', 'ukmn_network_posts_menu');
+add_action('network_admin_menu', 'ukmn_network_posts_menu');
 
 function ukmn_network_posts_menu() {
-	UKM_add_menu_page('content','Re-publish', 'Re-publish', 'administrator', 'UKMN_network_posts_admin', 'UKMN_network_posts_admin', 'http://ico.ukm.no/recycle-menu.png',9.1);    
+	$page = add_menu_page('Re-post', 'Re-post', 'superadmin', 'ukmn_network_posts_admin','ukmn_network_posts_admin', 'http://ico.ukm.no/recycle-menu.png',21);
+    add_action( 'admin_print_styles-' . $page, 'ukmn_network_posts_admin_sns' );
 }
 
-function UKMN_network_posts_admin() {
-	echo 'ello';
+function ukmn_network_posts_admin_sns() {
+	wp_enqueue_style( 'UKMsupport_css', plugin_dir_url( __FILE__ ) . 'ukmwp_repost.css');
+
+	wp_enqueue_script('WPbootstrap3_js');
+	wp_enqueue_style('WPbootstrap3_css');
+}
+
+function ukmn_network_posts_admin() {
+	require_once('controller/list_all.controller.php');
+	echo TWIG( $VIEW.'.html.twig', $TWIGdata, dirname(__FILE__), true);
 }
 
 ## HANDLE DELETE
@@ -56,8 +65,9 @@ function ukmn_network_posts( $post_id ) {
 	require_once('WPOO/WPOO/Author.php');
 	
 	$WPOO = new WPOO_Post( $post );
-
+	
 	$data = array('blog_id' => $blog_id,
+				  'blog_name' => get_bloginfo( 'name' ),
 				  'post_id' => $post->ID,
 				  'title' => $WPOO->title,
 				  'lead' => $WPOO->lead,
