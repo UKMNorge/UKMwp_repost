@@ -4,7 +4,7 @@
 {% for post in posts %}
 	<li class="col-xs-12 col-sm-6 col-md-3">
 		<p>
-			<b>{{ post.blogname }}:</b> {{ post.time|date('H:i') }}, {{ post.time|date('d.M') }}
+			<b>{{ post.blog_name }}:</b> {{ post.time|date('H:i') }}, {{ post.time|date('d.M') }}
 		</p>
 		<p>
 			<a href="{{ post.uri }}">
