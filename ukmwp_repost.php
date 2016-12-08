@@ -11,9 +11,10 @@ Author URI: http://mariusmandal.no
 add_action( 'save_post', 'ukmn_network_posts' );
 add_action('delete_post', 'ukmn_network_posts_delete', 8);
 add_action('network_admin_menu', 'ukmn_network_posts_menu');
+add_action('admin_bar_menu', 'sarp_adminbar',500);
 
 function ukmn_network_posts_menu() {
-	$page = add_menu_page('Re-post', 'Re-post', 'superadmin', 'ukmn_network_posts_admin','ukmn_network_posts_admin', 'http://ico.ukm.no/recycle-menu.png',21);
+	$page = add_menu_page('Re-publisér', 'Re-publisér', 'superadmin', 'ukmn_network_posts_admin','ukmn_network_posts_admin', 'http://ico.ukm.no/recycle-menu.png',21);
     add_action( 'admin_print_styles-' . $page, 'ukmn_network_posts_admin_sns' );
 }
 
@@ -25,8 +26,17 @@ function ukmn_network_posts_admin_sns() {
 }
 
 function ukmn_network_posts_admin() {
-	require_once('controller/list_all.controller.php');
-	echo TWIG( $VIEW.'.html.twig', $TWIGdata, dirname(__FILE__), true);
+	if( isset( $_GET['doRepost'] ) ) {
+		require_once('controller/repost_do.controller.php');
+		echo TWIG( 'reposted.html.twig', $TWIGdata, dirname(__FILE__), true);
+	}elseif( isset($_GET['repost_blog']) && isset($_GET['repost']) ) {
+		require_once('ukmwp_image_overlay.php');
+		require_once('controller/repost.controller.php');
+		echo TWIG( 'repost.html.twig', $TWIGdata, dirname(__FILE__), true);
+	} else {
+		require_once('controller/list_all.controller.php');
+		echo TWIG( $VIEW.'.html.twig', $TWIGdata, dirname(__FILE__), true);
+	}
 }
 
 ## HANDLE DELETE
@@ -89,4 +99,19 @@ function ukmn_network_posts( $post_id ) {
 	} else {
 		$wpdb->insert ( 'ukm_network_posts', $data );
 	}
+}
+## HOOK INTO ADMIN BAR FOR RE-POST BUTTON
+
+function sarp_adminbar() {
+	global $wp_admin_bar, $blog_id, $post;
+	if ( !is_super_admin() || !is_admin_bar_showing() || is_admin() || $blog_id == 1 || $post->post_type == 'page')
+		return;
+
+	$wp_admin_bar->add_menu( array(
+	'id' => 'sarp',
+	'parent' => '',
+	'title' => '<img src="http://ico.ukm.no/recycle-menu.png" style="float: left; margin-top: 7px; margin-right: 8px;"  />'
+	.'<div style="margin-top: 0px; float: left;">Re-publisér</div>',
+	'href' => '/wp-admin/network/admin.php?page=ukmn_network_posts_admin&repost_blog='.$blog_id.'&repost='.get_the_ID() 
+	) );
 }
