@@ -85,4 +85,4 @@ switch_to_blog( $_GET['repost_to_blog'] );
 
 restore_current_blog();
 
-unset($targetFile);
+unset($file);
