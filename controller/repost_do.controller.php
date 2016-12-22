@@ -8,7 +8,7 @@ switch_to_blog( $_POST['blog'] );
 	$post = wp_insert_post( $postdata );
 	
 	set_post_thumbnail( $post, $_POST['image'] );
-	$redirect = $_POST['linkto'] == 'original' ? 'redirect' : '_redirect';
+	$redirect = $_POST['linkto'] == 'original' ? 'redirect' : 'original';
 	add_post_meta($post, $redirect, $_POST['url']);
 
 restore_current_blog();
