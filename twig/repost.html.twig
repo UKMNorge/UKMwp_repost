@@ -34,12 +34,25 @@
 					<option value="1" selected="selected">Forsiden</option>
 				</select>
 			</div>
-
+			
+			<div class="form-group">
+				<label>
+					<input type="radio" name="linkto" value="original" checked="checked" /> Send brukeren til original-innlegget
+				</label>
+				<br />
+				<label>
+					<input type="radio" name="linkto" value="target" /> Send brukeren til det nye innlegget
+				</label>
+			</div>
+			
 			<div class="form-group">
 				<label>URL til original-saken</label>
 				<br />
 				<input class="form-control" name="url" type="text" value="{{ post.url }}" />
 			</div>
+
+			
+			<input type="hidden" name="content" value="{{ post.content }}" />
 
 			<br />
 			<button class="btn btn-success" type="submit">Opprett kladd</button>
