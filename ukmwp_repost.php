@@ -14,7 +14,7 @@ add_action('network_admin_menu', 'ukmn_network_posts_menu');
 add_action('admin_bar_menu', 'sarp_adminbar',500);
 
 function ukmn_network_posts_menu() {
-	$page = add_menu_page('Re-publisér', 'Re-publisér', 'superadmin', 'ukmn_network_posts_admin','ukmn_network_posts_admin', 'http://ico.ukm.no/recycle-menu.png',21);
+	$page = add_menu_page('Re-publisér', 'Re-publisér', 'superadmin', 'ukmn_network_posts_admin','ukmn_network_posts_admin', '//ico.ukm.no/recycle-menu.png',21);
     add_action( 'admin_print_styles-' . $page, 'ukmn_network_posts_admin_sns' );
 }
 
@@ -104,13 +104,13 @@ function ukmn_network_posts( $post_id ) {
 
 function sarp_adminbar() {
 	global $wp_admin_bar, $blog_id, $post;
-	if ( !is_super_admin() || !is_admin_bar_showing() || is_admin() || $blog_id == 1 || $post->post_type == 'page')
+	if ( !is_super_admin() || !is_admin_bar_showing() || is_admin() || $blog_id == 1 || (is_object($post) && $post->post_type == 'page'))
 		return;
 
 	$wp_admin_bar->add_menu( array(
 	'id' => 'sarp',
 	'parent' => '',
-	'title' => '<img src="http://ico.ukm.no/recycle-menu.png" style="float: left; margin-top: 7px; margin-right: 8px;"  />'
+	'title' => '<img src="//ico.ukm.no/recycle-menu.png" style="float: left; margin-top: 7px; margin-right: 8px;"  />'
 	.'<div style="margin-top: 0px; float: left;">Re-publisér</div>',
 	'href' => '/wp-admin/network/admin.php?page=ukmn_network_posts_admin&repost_blog='.$blog_id.'&repost='.get_the_ID() 
 	) );
