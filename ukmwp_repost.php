@@ -56,6 +56,7 @@ function ukmn_network_posts( $post_id ) {
 	// verify if this is an auto save routine.  // If it is our form has not been submitted, so we dont want to do anything
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
 	// Check permissions
+	if( !isset($_POST['post_type'])) return; // programmatisk skapt innhold har ikke denne
 	if ( 'page' == $_POST['post_type'] ){ if ( !current_user_can( 'edit_page', $post_id ) ) return;  } 
 	else { if ( !current_user_can( 'edit_post', $post_id ) ) return; }
 
