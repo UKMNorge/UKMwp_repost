@@ -5,7 +5,7 @@ require_once('WPOO/WPOO/Post.php');
 
 $TWIGdata = array();
 
-$_GET['repost_to_blog'] = 1;
+$_GET['repost_to_blog'] = 3449;
 
 // SWITCH TO SOURCE BLOG TO COLLECT DATA
 switch_to_blog( $_GET['repost_blog'] );
