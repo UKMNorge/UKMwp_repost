@@ -8,13 +8,9 @@
 	{% else %}
 		<form action="?page={{ GET('page') }}&action=repost" method="POST" class="form">
             <input type="hidden" name="blog_origin_name" value="{{ origin_blog_name }}" />
-			{#<div class="form-group">
-				<label>Nytt bilde</label>
-				<br />
-				<img src="{{ repost_img }}" style="max-width:300px" />
-				<br />
-				<input name="image" type="hidden" value="{{ image_id }}" />
-			</div>#}
+            <input type="hidden" name="url" value="{{ post.url }}" />
+			<input type="hidden" name="content" value="{{ post.content }}" />
+			<input type="hidden" name="image" value="{{ image_id }}" />
 			
 			<div class="form-group">
 				<label>Overskrift</label>
@@ -28,15 +24,6 @@
 				<textarea name="lead" class="form-control bind" data-bind="#preview_lead" type="text">{{ post.lead|raw }}</textarea>
 			</div>
 	
-			{#<div class="form-group">
-				<label>Hvilken side skal saken publiseres?</label>
-				<br />
-				<select name="blog" class="form-control">
-					<option value="1" selected="selected">Forsiden</option>
-					<option value="3449" selected="selected">Redaksjonelt</option>
-				</select>
-			</div>#}
-			
 			<div class="form-group">
                 <label>Når besøkende klikker på innlegget skal de:</label>
                 <br />
@@ -54,16 +41,6 @@
                     </p>
 				</label>
 			</div>
-			
-            <input class="form-control" name="url" type="hidden" value="{{ post.url }}" />
-			{#<div class="form-group">
-				<label>URL til original-saken</label>
-				<br />
-				<input class="form-control" name="url" type="text" value="{{ post.url }}" />
-			</div>
-            #}
-			
-			<input type="hidden" name="content" value="{{ post.content }}" />
 
 			<br />
 			<button class="btn btn-success" type="submit" name="submit" value="publish">Publiser</button> 
