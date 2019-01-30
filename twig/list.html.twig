@@ -1,4 +1,13 @@
-<h1>Publiserte innlegg på UKM.no</h1>
+<h1>Siste {{ limit }} publiserte innlegg i ditt nettverk</h1>
+<p class="lead">
+    {% if site_type == 'fylke' %}
+        Herfra kan du re-publisere nyheter fra dine lokalmønstringer til fylkessiden.
+        Før publisering kan du endre overskrift og ingress.
+    {% else %}
+        Herfra kan du re-publisere nyheter fra hele UKM.no til denne bloggen.
+    {% endif %}
+</p>
+
 
 <ul>
 {% for post in posts %}
@@ -13,7 +22,7 @@
 		</p>
 			
 		<p>
-			<a href="?page=ukmn_network_posts_admin&repost_blog={{ post.blog_id }}&repost={{ post.post_id }}" class="btn btn-xs btn-success pull-right">Re-publisér</a>
+			<a href="?page={{ GET('page') }}&action=review&repost_blog={{ post.blog_id }}&repost={{ post.post_id }}" class="btn btn-xs btn-success pull-right">Re-publisér</a>
 			<a href="{{ post.uri }}"><b>{{ post.title|raw }}</b></a>
 			<br />
 			{{ post.lead|raw }}

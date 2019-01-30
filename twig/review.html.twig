@@ -1,0 +1,92 @@
+<h1>Re-publisere {{ post.title|raw }}</h1>
+
+<div class="pull-left col-xs-12 col-sm-8 ">
+	{% if error is defined %}
+		<div class="alert alert-danger">
+			{{ error }}
+		</div>
+	{% else %}
+		<form action="?page={{ GET('page') }}&action=repost" method="POST" class="form">
+            <input type="hidden" name="blog_origin_name" value="{{ origin_blog_name }}" />
+			{#<div class="form-group">
+				<label>Nytt bilde</label>
+				<br />
+				<img src="{{ repost_img }}" style="max-width:300px" />
+				<br />
+				<input name="image" type="hidden" value="{{ image_id }}" />
+			</div>#}
+			
+			<div class="form-group">
+				<label>Overskrift</label>
+				<br />
+				<input class="form-control bind" name="title" data-bind="#preview_title > a > b" type="text" value="{{ post.title|raw }}" />
+			</div>
+	
+			<div class="form-group">
+				<label>Ingress</label>
+				<br />
+				<textarea name="lead" class="form-control bind" data-bind="#preview_lead" type="text">{{ post.lead|raw }}</textarea>
+			</div>
+	
+			{#<div class="form-group">
+				<label>Hvilken side skal saken publiseres?</label>
+				<br />
+				<select name="blog" class="form-control">
+					<option value="1" selected="selected">Forsiden</option>
+					<option value="3449" selected="selected">Redaksjonelt</option>
+				</select>
+			</div>#}
+			
+			<div class="form-group">
+                <label>Når besøkende klikker på innlegget skal de:</label>
+                <br />
+				<label>
+					<input type="radio" name="linkto" value="original" checked="checked" /> 
+                    Sendes til original-innlegget
+				</label>
+				<br />
+				<label>
+					<input type="radio" name="linkto" value="target" /> 
+                    Sendes til en kopi av innlegget på min nettside
+                    <p class="help text-muted" style="margin-left: 1.6em;">
+                        Bruk denne hvis du ønsker å skrive om deler av innlegget, 
+                        men likevel vise at den egentlig kommer fra en annen nettside.
+                    </p>
+				</label>
+			</div>
+			
+            <input class="form-control" name="url" type="hidden" value="{{ post.url }}" />
+			{#<div class="form-group">
+				<label>URL til original-saken</label>
+				<br />
+				<input class="form-control" name="url" type="text" value="{{ post.url }}" />
+			</div>
+            #}
+			
+			<input type="hidden" name="content" value="{{ post.content }}" />
+
+			<br />
+			<button class="btn btn-success" type="submit" name="submit" value="publish">Publiser</button> 
+            <span style="margin-left: 1em; margin-right: 1em;">eller </span>
+            <button class="btn btn-primary btn-sm btn-xs" type="submit" name="submit" value="draft">Opprett som kladd</button> 
+		</form>
+	{% endif %}
+</div>
+
+<div class="pull-right col-xs-12 col-sm-4">
+	<div class="well">
+		<p>
+			<a href="{{ post.url }}">
+				<div class="grid_post_image" style="background-image: url('{{ post.image.medium.src is not empty ? post.image.medium.src : post.image.src }}');"></div>
+			</a>
+		</p>
+			
+		<p id="preview_title"> 
+            Fra {{ origin_blog_name }}:
+			<a href="{{ post.url }}"><b>{{ post.title|raw }}</b></a>
+		</p>
+        <p id="preview_lead">
+            {{ post.lead|raw }}
+        </p>
+	</div>
+</div>
