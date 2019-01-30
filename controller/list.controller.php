@@ -27,9 +27,7 @@ UKMrepost::addViewData(
         "SELECT *
         FROM `ukm_network_posts`
         WHERE `deleted` = 'false'
-        "./*
         AND `blog_id` IN ( ". implode(',', $blogs) ." )
-        */"
         ORDER BY `id` DESC
         LIMIT $limit",
         ARRAY_A
