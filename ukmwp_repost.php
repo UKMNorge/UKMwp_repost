@@ -12,6 +12,7 @@ require_once('UKM/wp_modul.class.php');
 
 class UKMrepost extends UKMWPmodul {
     public static $action = 'list';
+    public static $path_plugin = null;
 
     /**
      * Register hooks
