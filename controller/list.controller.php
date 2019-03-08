@@ -18,7 +18,7 @@ if(($key = array_search($blog_id, $blogs)) !== false) {
     unset($blogs[$key]);
 }
 
-$limit = 60;
+$limit = 160;
 
 // Query and add view data
 UKMrepost::addViewData(
