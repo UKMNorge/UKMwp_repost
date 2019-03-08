@@ -18,7 +18,12 @@ if(($key = array_search($blog_id, $blogs)) !== false) {
     unset($blogs[$key]);
 }
 
-$limit = 160;
+if( !isset( $_GET['pagination'] ) ) {
+	$_GET['pagination'] = 0;
+}
+
+$limit = 60;
+$start = $limit * (int) $_GET['pagination'];
 
 // Query and add view data
 UKMrepost::addViewData(
@@ -29,10 +34,11 @@ UKMrepost::addViewData(
         WHERE `deleted` = 'false'
         AND `blog_id` IN ( ". implode(',', $blogs) ." )
         ORDER BY `id` DESC
-        LIMIT $limit",
+        LIMIT $start, $limit",
         ARRAY_A
     )
 );
 
+UKMrepost::addViewData('pagination', $_GET['pagination']);
 UKMrepost::addViewData('limit', $limit);
 UKMrepost::addViewData('site_type', get_option('site_type'));

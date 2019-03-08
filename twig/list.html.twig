@@ -1,4 +1,9 @@
-<h1>Siste {{ limit }} publiserte innlegg i ditt nettverk</h1>
+<h1>
+	Siste publiserte innlegg i ditt nettverk
+	<span class="label label-primary" style="font-size: .3em;">
+		Sak {{ pagination * limit }} - {{ pagination * limit + limit }}
+	</span>
+</h1>
 <p class="lead">
     {% if site_type == 'fylke' %}
         Herfra kan du re-publisere nyheter fra dine lokalmønstringer til fylkessiden.
@@ -7,6 +12,7 @@
         Herfra kan du re-publisere nyheter fra hele UKM.no til denne bloggen.
     {% endif %}
 </p>
+<p class="lead"></p>
 
 
 <ul>
@@ -37,3 +43,8 @@
 
 {% endfor %}
 </ul>
+
+{% if pagination > 0 %}
+	<a href="?page={{ GET('page') }}&pagination={{ pagination - 1 }}" class="btn btn-primary">Vis nyere saker</a>
+{% endif %}
+<a href="?page={{ GET('page') }}&pagination={{ pagination + 1}}" class="btn btn-primary">Vis eldre saker</a>
