@@ -34,7 +34,7 @@ class UKMrepost extends UKMWPmodul {
             'edit.php',
             'Re-publisér', 
             'Re-publisér', 
-            'editor', 
+            'administrator', 
             'ukm_repost',
             ['UKMrepost','renderAdmin']
         );
