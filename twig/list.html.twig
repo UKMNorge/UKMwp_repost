@@ -34,10 +34,10 @@
 			{{ post.lead|raw }}
 		</p>
 	</li>
-	{% if loop.index is divisibleby( 4 )%}
+	{% if loop.index is divisible by( 4 )%}
 		<li class="clearfix visible-md visible-lg"></li>
 	{% endif %}
-	{% if loop.index is divisibleby( 2 )%}
+	{% if loop.index is divisible by( 2 )%}
 		<li class="clearfix visible-sm"></li>
 	{% endif %}
 
