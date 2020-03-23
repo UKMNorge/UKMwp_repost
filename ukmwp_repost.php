@@ -8,9 +8,11 @@ Version: 2.0
 Author URI: http://mariusmandal.no
 */
 
-require_once('UKM/wp_modul.class.php');
+use UKMNorge\Wordpress\Modul;
 
-class UKMrepost extends UKMWPmodul {
+require_once('UKM/Autoloader.php');
+
+class UKMrepost extends Modul {
     public static $action = 'list';
     public static $path_plugin = null;
 
