@@ -48,10 +48,10 @@ class UKMrepost extends Modul {
 
     public static function scripts_and_styles() {
 		wp_enqueue_script('WPbootstrap3_js');
-		wp_enqueue_script('UKMrepost_scripts', PLUGIN_PATH .'UKMwp_repost/ukmwp_repost.js');
+		wp_enqueue_script('UKMrepost_scripts', plugin_dir_url( __FILE__ ) .'ukmwp_repost.js');
         
         wp_enqueue_style('WPbootstrap3_css');
-		wp_enqueue_style('UKMrepost_styles', PLUGIN_PATH .'UKMwp_repost/ukmwp_repost.css');
+		wp_enqueue_style('UKMrepost_styles', plugin_dir_url( __FILE__ ) .'ukmwp_repost.css');
     }
 
     public static function registerPost( $post_id ) {
